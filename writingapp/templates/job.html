@@ -1,0 +1,18 @@
+{% extends "layout.html" %}
+{% block content %}
+    <article class='media content-section'>
+        <div class='media-body'>
+            <div class='article-metadata'>
+                <a class='mr-2' href="{{ url_for('similar_jobs', by_service=job.service) }}">{{ job.service }}</a>
+                <small class='text-muted'>{{job.deadline}}</small>
+            </div>
+            <h2 class='article-title'>Job Title: {{job.subject}}</h2>
+            <p class='article-content'>Instructions: {{job.instructions}}</p>
+            <p class='article-content'>Complexity: {{job.complexity}}</p>
+            <p class='article-content'>Amount: {{job.amount}}</p>
+            <p class='article-content'>Assignment Type: {{job.assignment_type}}</p>
+            <p class='article-content'>Education Level: {{job.education_level}}</p>
+            <p class='article-content'>Number Of Pages: {{job.number_of_pages}}</p>
+        </div>
+    </article>
+{% endblock content %}

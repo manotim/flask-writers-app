@@ -1,0 +1,32 @@
+{% extends "layout.html" %}
+{% block content %}
+<h1 class='mb-3'>Jobs about {{job.service}} ({{jobs.total}})</h1>
+    {% for job in jobs.items %}
+    <article class='media content-section'>
+        <div class='media-body'>
+            <div class='article-metadata'>
+                <a class='mr-2' href="{{ url_for('similar_jobs', by_service=job.service) }}">{{ job.service }}</a>
+                <small class='text-muted'>{{job.deadline}}</small>
+            </div>
+            <h2><a class='article-title' href="{{ url_for('show_job', job_id=job.id) }}">{{job.subject}}</a></h2>
+            <p class='article-content'>Instructions: {{job.instructions}}</p>
+            <p class='article-content'>Complexity: {{job.complexity}}</p>
+            <p class='article-content'>Amount: {{job.amount}}</p>
+            <p class='article-content'>Assignment Type: {{job.assignment_type}}</p>
+            <p class='article-content'>Education Level: {{job.education_level}}</p>
+            <p class='article-content'>Number Of Pages: {{job.number_of_pages}}</p>
+        </div>
+    </article>
+    {% endfor %}
+    {% for page_num in jobs.iter_pages(left_edge=1, right_edge=1, left_current=1, right_current=2) %}
+        {% if page_num %}
+        {% if jobs.page == page_num %}
+        <a class='btn btn-info mb-4' href='{{ url_for('similar_jobs', by_service=job.service, page=page_num) }}'>{{ page_num }}</a>
+        {% else %}
+        <a class='btn btn-outline-info mb-4' href='{{ url_for('similar_jobs', by_service=job.service, page=page_num) }}'>{{ page_num }}</a>
+        {% endif %}
+        {% else %}
+         ...
+        {% endif %}
+    {% endfor %}
+{% endblock content %}
